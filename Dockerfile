@@ -9,7 +9,7 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=./installed ..
 RUN cmake --build . --config Release --target install
 
 FROM ubuntu AS compress
-COPY --from=build /brotli/out/brotli .
+COPY --from=build /brotli/out/brotli /brotli
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
