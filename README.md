@@ -2,13 +2,16 @@
 
 GitHub action to perform brotli compression
 
-## TODO
+## Inputs
 
-- Find a effective way of getting the directory in/out of the container
-- Add checking to shell script if none of a file type are present
-- Stretch: add custom file types
+### `target-directory`
 
-## Run cmds
+**Optional** The directory in the action workspace to recusively compress. Defaults to the root workspace directory.
 
-    docker build --rm -f Dockerfile -t brotlitest .
-    docker run --rm --mount type=bind,source="$(pwd)"/build,target=/build -it brotlitest
+## Example usage
+
+    - name: Brotli compress the "build" directory
+      id: brotli
+      uses: charlesworth/brotli-github-action@1.0
+      with:
+        target-directory: 'build'
