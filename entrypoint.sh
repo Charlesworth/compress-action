@@ -4,6 +4,8 @@
 CURRENT_DIR="."
 DIR=${1:-$CURRENT_DIR}   # Defaults to "."
 
+ls -R
+
 for FILE_EXT in '*.js' '*.css' '*.html'
 do
 	FILES=`find $DIR -type f -path $FILE_EXT`
@@ -11,6 +13,7 @@ do
 	then
 		echo "no $FILE_EXT files found"
 	else
-		echo $FILES | xargs ./brotli -v --
+		echo $FILES
+		echo $FILES | xargs /brotli -v --
 	fi
 done
