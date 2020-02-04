@@ -11,4 +11,4 @@ GitHub action to perform brotli compression
 ## Run cmds
 
     docker build --rm -f Dockerfile -t brotlitest .
-    docker run --mount type=bind,source="$(pwd)"/build,target=/build -it brotlitest
+    docker run --rm --mount type=bind,source="$(pwd)"/build,target=/build -it brotlitest

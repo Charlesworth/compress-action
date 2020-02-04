@@ -2,5 +2,11 @@
 
 for FILE_EXT in '*.js' '*.css' '*.html'
 do
-	find build -type f -path $FILE_EXT | xargs ./brotli -v --
+	FILES=`find build -type f -path $FILE_EXT`
+	if [ -z "$FILES" ]
+	then
+		echo "no $FILE_EXT files found"
+	else
+		echo $FILES | xargs ./brotli -v --
+	fi
 done
