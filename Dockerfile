@@ -11,5 +11,5 @@ RUN cmake --build . --config Release --target install
 FROM ubuntu AS compress
 COPY --from=build /brotli/out/brotli .
 COPY /brotli_in_place.sh .
-COPY ./build ./build
-RUN ./brotli_in_place.sh
+
+ENTRYPOINT [ "./brotli_in_place.sh" ]
