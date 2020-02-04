@@ -1,10 +1,8 @@
 #!/bin/sh -l
 
 # $1 should be the directory containing the items you want to compress
-CURRENT_DIR="."
-DIR=${1:-$CURRENT_DIR}   # Defaults to "."
-
-ls -R
+WORKSPACE_DIR="/github/workspace/"
+DIR="${WORKSPACE_DIR}${1}"
 
 for FILE_EXT in '*.js' '*.css' '*.html'
 do
@@ -13,7 +11,6 @@ do
 	then
 		echo "no $FILE_EXT files found"
 	else
-		echo $FILES
 		echo $FILES | xargs /brotli -v --
 	fi
 done
