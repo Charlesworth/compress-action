@@ -1,0 +1,12 @@
+name: 'Brotli compression'
+description: 'Brotli compress all .js .html and .css files in a directory'
+inputs:
+  target-directory:
+    description: 'directory to target'
+    required: true
+    default: '.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.target-directory }}
