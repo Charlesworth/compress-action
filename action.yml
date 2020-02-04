@@ -1,4 +1,4 @@
-name: 'Brotli compression'
+name: 'brotli-compression'
 description: 'Brotli compress all .js .html and .css files in a directory'
 inputs:
   target-directory:
