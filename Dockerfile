@@ -10,6 +10,6 @@ RUN cmake --build . --config Release --target install
 
 FROM ubuntu AS compress
 COPY --from=build /brotli/out/brotli .
-COPY /entrypoint.sh .
+COPY entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT ["/entrypoint.sh"]
