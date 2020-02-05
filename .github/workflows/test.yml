@@ -3,6 +3,10 @@ on:
   pull_request:
     branches:
       - master
+  push:
+    branches:
+      - master
+      - 'feature/*'
 
 jobs:
   test_with_input:
