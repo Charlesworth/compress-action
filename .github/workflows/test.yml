@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Test brotli action with input
     steps:
-      - name: Check out repo
+      - name: check out repo
         uses: actions/checkout@v1
 
       - name: check the files have not been compressed yet
@@ -40,12 +40,9 @@ jobs:
         run: |
           import sys
           import os
-          if os.path.isfile('./test/dirB/test.html.br'):
-            sys.exit("Error: Compressed .html file was not found in a non target directory")
-          if os.path.isfile('./test/dirB/test.css.br'):
-            sys.exit("Error: Compressed .css file was not found in a non target directory")
-          if os.path.isfile('./test/dirB/test.js.br'):
-            sys.exit("Error: Compressed .js file was not found in a non target directory")
+          for fileType in [".html", ".css", ".js", ".txt"]:
+            if os.path.isfile('./test/dirB/test{}.br'.format(fileType)):
+              sys.exit('Error: Compressed {} file was not found in a non target directory'.format(fileType))
         shell: python
 
       - name: check the incorrect file types have not been compressed
@@ -60,12 +57,38 @@ jobs:
     runs-on: ubuntu-latest
     name: Test brotli action without input
     steps:
-      - name: Check Out Repo
+      - name: check Out Repo
         uses: actions/checkout@v1
-      - name: get the dir structure
-        run: ls -R
+
+      - name: check the files have not been compressed yet
+        run: |
+          import sys
+          import os
+          for directory in ["/dirA", "/dirB"]:
+            for fileType in [".html", ".css", ".js"]:
+              if os.path.isfile('./test{}/test{}.br'.format(directory, fileType)):
+                sys.exit('Error: Compressed {}/test{} file was found before it should have been compressed'.format(directory, fileType))
+        shell: python
+
       - name: Test the brotli action step
         id: brotli-test
         uses: charlesworth/brotli-github-action@0.6
-      - name: get the dir structure
-        run: ls -R
+
+      - name: check the files have now been compressed
+        run: |
+          import sys
+          import os
+          for directory in ["/dirA", "/dirB"]:
+            for fileType in [".html", ".css", ".js"]:
+              if not os.path.isfile('./test{}/test{}.br'.format(directory, fileType)):
+                sys.exit('Error: Compressed {}/test{} file was not found'.format(directory, fileType))
+        shell: python
+
+      - name: check the incorrect file types have not been compressed
+        run: |
+          import sys
+          import os
+          for directory in ["/dirA", "/dirB"]:
+            if os.path.isfile('./test{}/test.txt.br'.format(directory)):
+              sys.exit('Error: Compressed {}/test.txt file was found when it should not have been compressed'.format(directory))
+        shell: python
