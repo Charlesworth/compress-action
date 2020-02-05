@@ -13,17 +13,32 @@ jobs:
     runs-on: ubuntu-latest
     name: Test brotli action with input
     steps:
-      - name: Check Out Repo
+      - name: Check out repo
         uses: actions/checkout@v1
+
       - name: get the dir structure
-        run: ls -R
+        run: |
+          import os
+          print(os.environ['PATH'])
+        shell: python
+
       - name: Test the brotli action step
         id: brotli-test
         uses: charlesworth/brotli-github-action@0.6
         with:
           target-directory: 'test/directoryA'
+
       - name: get the dir structure
         run: ls -R
+
+      - name: get the dir structure
+        run: |
+          import sys
+          import os
+          if not os.path.isfile('./test/subDir/test.html.br'):
+            sys.exit("Compressed file was not found")
+        shell: python
+
   test_without_input:
     runs-on: ubuntu-latest
     name: Test brotli action without input
