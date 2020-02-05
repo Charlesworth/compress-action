@@ -1,0 +1,35 @@
+name: Test
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Test brotli action
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v1
+      - name: get the dir structure
+        run: ls -R
+      - name: Test the brotli action step
+        id: brotli-test
+        uses: charlesworth/brotli-github-action@0.6
+        with:
+          target-directory: 'test/directoryA'
+      - name: get the dir structure
+        run: ls -R
+  hello_world_job_2:
+    runs-on: ubuntu-latest
+    name: Test brotli action without arguements
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v1
+      - name: get the dir structure
+        run: ls -R
+      - name: Test the brotli action step
+        id: brotli-test
+        uses: charlesworth/brotli-github-action@0.6
+      - name: get the dir structure
+        run: ls -R
