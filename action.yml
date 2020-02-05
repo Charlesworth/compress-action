@@ -1,5 +1,5 @@
-name: 'brotli-github-action'
-description: 'Brotli compress all .js .html and .css files in a directory'
+name: 'compress-action'
+description: 'Brotli compress all .js .html and .css files in a directory recursively'
 author: 'charlesworth'
 branding:
   icon: 'minimize-2'
