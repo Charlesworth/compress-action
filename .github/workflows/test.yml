@@ -5,9 +5,9 @@ on:
       - master
 
 jobs:
-  hello_world_job:
+  test_with_input:
     runs-on: ubuntu-latest
-    name: Test brotli action
+    name: Test brotli action with input
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v1
@@ -20,9 +20,9 @@ jobs:
           target-directory: 'test/directoryA'
       - name: get the dir structure
         run: ls -R
-  hello_world_job_2:
+  test_without_input:
     runs-on: ubuntu-latest
-    name: Test brotli action without arguements
+    name: Test brotli action without input
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v1
