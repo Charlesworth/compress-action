@@ -3,10 +3,6 @@ on:
   pull_request:
     branches:
       - master
-  push:
-    branches:
-      - master
-      - 'feature/*'
 
 jobs:
   test_with_input:
@@ -56,6 +52,14 @@ jobs:
             sys.exit("Error: Compressed .css file was not found in a non target directory")
           if os.path.isfile('./test/dirB/test.js.br'):
             sys.exit("Error: Compressed .js file was not found in a non target directory")
+        shell: python
+
+      - name: check the incorrect file types have not been compressed
+        run: |
+          import sys
+          import os
+          if os.path.isfile('./test/dirB/test.txt.br'):
+            sys.exit("Error: Compressed .txt file was found when it should not have been compressed")
         shell: python
 
   test_without_input:
