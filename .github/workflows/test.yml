@@ -22,10 +22,10 @@ jobs:
           import os
           if os.path.isfile('./test/dirA/test.html.br'):
             sys.exit("Error: Compressed .html file was found before it should have been compressed")
-          # if os.path.isfile('./test/dirA/test.css.br'):
-          #   sys.exit("Error: Compressed .css file was found before it should have been compressed")
-          # if os.path.isfile('./test/dirA/test.js.br'):
-          #   sys.exit("Error: Compressed .js file was found before it should have been compressed")
+          if os.path.isfile('./test/dirA/test.css.br'):
+            sys.exit("Error: Compressed .css file was found before it should have been compressed")
+          if os.path.isfile('./test/dirA/test.js.br'):
+            sys.exit("Error: Compressed .js file was found before it should have been compressed")
         shell: python
 
       - name: Test the brotli action step
@@ -40,10 +40,22 @@ jobs:
           import os
           if not os.path.isfile('./test/dirA/test.html.br'):
             sys.exit("Error: Compressed .html file was not found")
-          # if not os.path.isfile('./test/dirA/test.css.br'):
-          #   sys.exit("Error: Compressed .css file was not found")
-          # if not os.path.isfile('./test/dirA/test.js.br'):
-          #   sys.exit("Error: Compressed .js file was not found")
+          if not os.path.isfile('./test/dirA/test.css.br'):
+            sys.exit("Error: Compressed .css file was not found")
+          if not os.path.isfile('./test/dirA/test.js.br'):
+            sys.exit("Error: Compressed .js file was not found")
+        shell: python
+
+      - name: check the files from a seperate firectory have not been compressed
+        run: |
+          import sys
+          import os
+          if os.path.isfile('./test/dirB/test.html.br'):
+            sys.exit("Error: Compressed .html file was not found in a non target directory")
+          if os.path.isfile('./test/dirB/test.css.br'):
+            sys.exit("Error: Compressed .css file was not found in a non target directory")
+          if os.path.isfile('./test/dirB/test.js.br'):
+            sys.exit("Error: Compressed .js file was not found in a non target directory")
         shell: python
 
   test_without_input:
