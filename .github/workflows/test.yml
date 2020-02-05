@@ -23,7 +23,7 @@ jobs:
 
       - name: Test the brotli action step
         id: brotli-test
-        uses: charlesworth/brotli-github-action@0.6
+        uses: charlesworth/compress-action@0.6
         with:
           target-directory: 'test/dirA'
 
@@ -72,7 +72,7 @@ jobs:
 
       - name: Test the brotli action step
         id: brotli-test
-        uses: charlesworth/brotli-github-action@0.6
+        uses: charlesworth/compress-action@0.6
 
       - name: Check the files have now been compressed
         run: |
