@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Test brotli action with input
     steps:
-      - name: check out repo
+      - name: Check out repo
         uses: actions/checkout@v1
 
-      - name: check the files have not been compressed yet
+      - name: Check the files have not been compressed yet
         run: |
           import sys
           import os
@@ -27,7 +27,7 @@ jobs:
         with:
           target-directory: 'test/dirA'
 
-      - name: check the files have now been compressed
+      - name: Check the files have now been compressed
         run: |
           import sys
           import os
@@ -36,7 +36,7 @@ jobs:
               sys.exit('Error: Compressed {} file was not found'.format(fileType))
         shell: python
 
-      - name: check the files from a seperate firectory have not been compressed
+      - name: Check the files from a seperate firectory have not been compressed
         run: |
           import sys
           import os
@@ -45,7 +45,7 @@ jobs:
               sys.exit('Error: Compressed {} file was not found in a non target directory'.format(fileType))
         shell: python
 
-      - name: check the incorrect file types have not been compressed
+      - name: Check the incorrect file types have not been compressed
         run: |
           import sys
           import os
@@ -57,10 +57,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Test brotli action without input
     steps:
-      - name: check Out Repo
+      - name: Check out repo
         uses: actions/checkout@v1
 
-      - name: check the files have not been compressed yet
+      - name: Check the files have not been compressed yet
         run: |
           import sys
           import os
@@ -74,7 +74,7 @@ jobs:
         id: brotli-test
         uses: charlesworth/brotli-github-action@0.6
 
-      - name: check the files have now been compressed
+      - name: Check the files have now been compressed
         run: |
           import sys
           import os
@@ -84,7 +84,7 @@ jobs:
                 sys.exit('Error: Compressed {}/test{} file was not found'.format(directory, fileType))
         shell: python
 
-      - name: check the incorrect file types have not been compressed
+      - name: Check the incorrect file types have not been compressed
         run: |
           import sys
           import os
