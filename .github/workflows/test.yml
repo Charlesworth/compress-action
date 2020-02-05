@@ -16,12 +16,9 @@ jobs:
         run: |
           import sys
           import os
-          if os.path.isfile('./test/dirA/test.html.br'):
-            sys.exit("Error: Compressed .html file was found before it should have been compressed")
-          if os.path.isfile('./test/dirA/test.css.br'):
-            sys.exit("Error: Compressed .css file was found before it should have been compressed")
-          if os.path.isfile('./test/dirA/test.js.br'):
-            sys.exit("Error: Compressed .js file was found before it should have been compressed")
+          for fileType in [".html", ".css", ".js"]:
+            if os.path.isfile('./test/dirA/test{}.br'.format(fileType)):
+              sys.exit('Error: Compressed {} file was found before it should have been compressed'.format(fileType))
         shell: python
 
       - name: Test the brotli action step
@@ -34,12 +31,9 @@ jobs:
         run: |
           import sys
           import os
-          if not os.path.isfile('./test/dirA/test.html.br'):
-            sys.exit("Error: Compressed .html file was not found")
-          if not os.path.isfile('./test/dirA/test.css.br'):
-            sys.exit("Error: Compressed .css file was not found")
-          if not os.path.isfile('./test/dirA/test.js.br'):
-            sys.exit("Error: Compressed .js file was not found")
+          for fileType in [".html", ".css", ".js"]:
+            if not os.path.isfile('./test/dirA/test{}.br'.format(fileType)):
+              sys.exit('Error: Compressed {} file was not found'.format(fileType))
         shell: python
 
       - name: check the files from a seperate firectory have not been compressed
