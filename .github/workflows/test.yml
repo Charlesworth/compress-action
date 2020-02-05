@@ -16,27 +16,34 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v1
 
-      - name: get the dir structure
+      - name: check the files have not been compressed yet
         run: |
+          import sys
           import os
-          print(os.environ['PATH'])
+          if os.path.isfile('./test/dirA/test.html.br'):
+            sys.exit("Error: Compressed .html file was found before it should have been compressed")
+          # if os.path.isfile('./test/dirA/test.css.br'):
+          #   sys.exit("Error: Compressed .css file was found before it should have been compressed")
+          # if os.path.isfile('./test/dirA/test.js.br'):
+          #   sys.exit("Error: Compressed .js file was found before it should have been compressed")
         shell: python
 
       - name: Test the brotli action step
         id: brotli-test
         uses: charlesworth/brotli-github-action@0.6
         with:
-          target-directory: 'test/directoryA'
+          target-directory: 'test/dirA'
 
-      - name: get the dir structure
-        run: ls -R
-
-      - name: get the dir structure
+      - name: check the files have now been compressed
         run: |
           import sys
           import os
-          if not os.path.isfile('./test/subDir/test.html.br'):
-            sys.exit("Compressed file was not found")
+          if not os.path.isfile('./test/dirA/test.html.br'):
+            sys.exit("Error: Compressed .html file was not found")
+          # if not os.path.isfile('./test/dirA/test.css.br'):
+          #   sys.exit("Error: Compressed .css file was not found")
+          # if not os.path.isfile('./test/dirA/test.js.br'):
+          #   sys.exit("Error: Compressed .js file was not found")
         shell: python
 
   test_without_input:
