@@ -20,7 +20,7 @@ With a target:
 
       - name: Brotli compress the html, css and js files in the "build" directory
         id: brotli
-        uses: charlesworth/compress-action@1.0
+        uses: charlesworth/compress-action@1.0.0
         with:
           target-directory: 'build'
 
@@ -32,4 +32,4 @@ Without a target (target the root of the workspace):
 
       - name: Brotli compress the html, css and js files in repository
         id: brotli
-        uses: charlesworth/compress-action@1.0
+        uses: charlesworth/compress-action@1.0.0
