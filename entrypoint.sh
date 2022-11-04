@@ -6,7 +6,7 @@ DIR="${WORKSPACE_DIR}${1}"
 
 for FILE_EXT in '*.js' '*.css' '*.html'
 do
-	FILES=`find $DIR -type f -path $FILE_EXT`
+	FILES=`find $DIR -type f -path "$FILE_EXT"`
 	if [ -z "$FILES" ]
 	then
 		echo "no $FILE_EXT files found"
